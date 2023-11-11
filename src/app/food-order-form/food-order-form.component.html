@@ -1,0 +1,96 @@
+<app-order-confirmation
+  *ngIf="confirmed"
+  [order]="order"
+  (orderBack)="orderBack()"
+  class="d-flex align-items-center vh-100"
+></app-order-confirmation>
+
+<div *ngIf="!confirmed" class="d-flex align-items-center vh-100">
+  <div class="container card--md">
+    <div class="card px-3 m-4 m-md-0 card-min-height-half">
+      <div class="card-body card-chart">
+        <div class="row mb-2 mb-md-4">
+          <div class="col">
+            <h5 class="card-title">{{ lang.get("orderForm") }}</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-4 mt-4 mt-md-0">
+            <div>
+              <p class="h6">{{ lang.get("preference") }}</p>
+              <div
+                *ngFor="let preference of preferences; index as i"
+                class="form-check"
+              >
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="preferences"
+                  (click)="changePreference(preference)"
+                  [id]="'preferences-' + i"
+                />
+                <label class="form-check-label" [for]="'preferences-' + i">
+                  {{ preference.value }}
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4 mt-4 mt-md-0">
+            <div>
+              <p class="h6">{{ lang.get("meal") }}</p>
+              <div *ngFor="let meal of meals; index as i" class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="meals"
+                  (click)="changeMeal(meal)"
+                  [disabled]="order.preference === emptyChoice"
+                  [checked]="order.meal === meal && order.meal !== emptyChoice"
+                  [id]="'meals-' + i"
+                />
+                <label class="form-check-label" [for]="'meals-' + i">
+                  {{ meal.value }}
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4 mt-4 mt-md-0">
+            <div>
+              <p class="h6">{{ lang.get("side") }}</p>
+              <div *ngFor="let side of sides; index as i" class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="sides"
+                  (click)="changeSide(side)"
+                  [disabled]="order.meal === emptyChoice"
+                  [checked]="order.side === side && order.side !== emptyChoice"
+                  [id]="'sides-' + i"
+                />
+                <label class="form-check-label" [for]="'sides-' + i">
+                  {{ side.value }}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-12">
+            <button
+              type="button"
+              class="btn btn-primary mb-3 float-end"
+              (click)="onSubmit()"
+              [disabled]="
+                order.preference === emptyChoice ||
+                order.meal === emptyChoice ||
+                order.side === emptyChoice
+              "
+            >
+              {{ lang.get("submit") }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

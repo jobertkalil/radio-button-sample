@@ -1,0 +1,46 @@
+<div class="container card--md">
+  <div class="card px-3 m-4 m-md-0 card-min-height-half">
+    <div class="card-body card-chart">
+      <div class="row mb-2 mb-md-4">
+        <div class="col">
+          <h5 class="card-title">{{ lang.get("orderSummary") }}</h5>
+        </div>
+      </div>
+      <dl class="row">
+        <dt class="col-6 col-md-4">
+          <p>{{ lang.get("preference") }}:</p>
+        </dt>
+        <dd class="col-6 col-md-8">
+          <p>{{ order.preference.value }}</p>
+        </dd>
+      </dl>
+      <dl class="row">
+        <dt class="col-6 col-md-4">
+          <p>{{ lang.get("meal") }}:</p>
+        </dt>
+        <dd class="col-6 col-md-8">
+          <p>{{ order.meal.value }}</p>
+        </dd>
+      </dl>
+      <dl class="row">
+        <dt class="col-6 col-md-4">
+          <p>{{ lang.get("side") }}:</p>
+        </dt>
+        <dd class="col-6 col-md-8">
+          <p>{{ order.side.value }}</p>
+        </dd>
+      </dl>
+      <div class="row mt-3">
+        <div class="col-12">
+          <button
+            type="button"
+            class="btn btn-primary mb-3 float-end"
+            (click)="goBack()"
+          >
+            {{ lang.get("reOrder") }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
